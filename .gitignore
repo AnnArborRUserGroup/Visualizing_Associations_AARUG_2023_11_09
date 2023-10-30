@@ -40,3 +40,14 @@ inst/doc
 
 # Omit log files created by knitting to PDF.
 inst/*.log
+
+# HTML Files
+
+*.html
+*.html
+
+# RevealJS Files
+
+# PDFs
+
+*.pdf
