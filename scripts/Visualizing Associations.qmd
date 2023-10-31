@@ -26,6 +26,15 @@ Which ones you can run in R
 -   Heatmaps
 -   Other figures
 
+## Packages Used
+
+-   ggplot2
+  -   geom_tile for heatmaps
+-   pheatmap
+-   ggally
+  -   ggpairs() function
+-   corrgram
+
 ## Load Packages - General
 
 ```{r}
@@ -51,6 +60,7 @@ library(quarto)           # for quarto_version()
 
 ## Load Packages - Easystats
 
+<https://github.com/easystats>
 
 ```{r}
 #| label: load-packages-easystats
@@ -61,4 +71,17 @@ library(see)               # for visualization
 library(correlation)       # for correlations
 
 ```
+
+## St
+
+
+## References
+
+-   The R Graph Gallery <https://r-graph-gallery.com/>
+-   R-Charts <https://r-charts.com/>
+-   easystats <https://github.com/easystats>
+  -   The correlation package <https://easystats.github.io/blog/posts/correlation_presentation/>
+  
+  
+  
 
