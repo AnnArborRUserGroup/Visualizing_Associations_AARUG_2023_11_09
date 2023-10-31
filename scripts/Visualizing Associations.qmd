@@ -13,8 +13,6 @@ author:
 
 # What Will This Presentation Cover
 
-
-
 ## Correlations and Associations
 
 Which ones you can run in R
@@ -26,12 +24,12 @@ Which ones you can run in R
 
 -   Plots
 -   Heatmaps
+-   Other figures
 
-
-## Load Packages
+## Load Packages - General
 
 ```{r}
-#| label: load-packages
+#| label: load-packages-general
 #| echo: true
 
 # Load some packages
@@ -42,13 +40,25 @@ library(tidyr)        # for pivot_longer(), pivot_wider(), etc.
 library(rmarkdown)    # for render()
 library(knitr)      
 library(kableExtra) 
-library(knitr)        # for kable()
+library(knitr)        # for kable(), which makes nice tables.
 #opts_knit$set(eval.after = 'fig.cap') 
 options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
 library(quarto)           # for quarto_version()
+
+
 ```
 
-## Load Packages
+## Load Packages - Easystats
 
+
+```{r}
+#| label: load-packages-easystats
+#| echo: true
+
+# Load some packages
+library(see)               # for visualization
+library(correlation)       # for correlations
+
+```
 
