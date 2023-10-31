@@ -1,0 +1,54 @@
+---
+title: "Visualizing Associations"
+subtitle: "Ann Arbor R Users Group Meeting, 9 Nov 2023"
+format: revealjs
+editor: visual
+author: 
+  - name: Barry DeCicco
+    orcid: 0000-0002-5013-1151
+    email: bdecicco2001@yahoo.edu
+    affiliations: 
+      - name: Michigan State University, Center for Statistical Training and Consulting
+---
+
+# What Will This Presentation Cover
+
+
+
+## Correlations and Associations
+
+Which ones you can run in R
+
+-   How to get usable data sets.
+-   INSERT TEXT HERE
+
+## How to Display The Results
+
+-   Plots
+-   Heatmaps
+
+
+## Load Packages
+
+```{r}
+#| label: load-packages
+#| echo: true
+
+# Load some packages
+library(devtools)   #  
+library(here)       # for here(), i_am()
+library(dplyr)        # for %>%, arrange(), filter(), group_by(), mutate(), etc.
+library(tidyr)        # for pivot_longer(), pivot_wider(), etc.
+library(rmarkdown)    # for render()
+library(knitr)      
+library(kableExtra) 
+library(knitr)        # for kable()
+#opts_knit$set(eval.after = 'fig.cap') 
+options(kableExtra.latex.load_packages = FALSE)
+library(kableExtra)
+library(quarto)           # for quarto_version()
+```
+
+## Load Packages
+
+
