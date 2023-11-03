@@ -2,7 +2,7 @@
 title: "Visualizing Associations"
 subtitle: "Ann Arbor R Users Group Meeting, 9 Nov 2023"
 format: revealjs
-editor: visual
+editor: source
 author: 
   - name: Barry DeCicco
     orcid: 0000-0002-5013-1151
@@ -29,10 +29,10 @@ Which ones you can run in R
 ## Packages Used
 
 -   ggplot2
-  -   geom_tile for heatmaps
+-   geom_tile for heatmaps
 -   pheatmap
 -   ggally
-  -   ggpairs() function
+-   ggpairs() function
 -   corrgram
 
 ## Load Packages - General
@@ -58,6 +58,18 @@ library(quarto)           # for quarto_version()
 
 ```
 
+## Load Packages - Less Common, Good for Correlations
+
+```{r}
+#| label: load-packages-less-common
+#| echo: true
+
+# Load some packages
+library(GGally)   
+library(pheatmap)  
+
+```
+
 ## Load Packages - Easystats
 
 <https://github.com/easystats>
@@ -72,16 +84,45 @@ library(correlation)       # for correlations
 
 ```
 
-## St
+## What is a correlation matrix?
 
+-   It's a square matrix of numbers, with certain properties.
+-   Each entry X ~ij~ is the correlation between the ith and jth variables.
+-   In this case, we could use associations rather than correlations,
+where the association is bounded by [-1,1] or [0,1], and X ~ii~ = 1
+-   The correlation matrix might be computed using listwise deletion or by pairwise deletion.  In the latter case, the matrix might not meet other requirements (i.e., not positive semi-definite) which will not be dealt with here.
+
+
+## Examples of Correlation Matrices
+
+- Create synthetic data 
+```{r}
+set.seed(8)
+m <- matrix(round(rnorm(200), 2), 10, 10)
+
+colnames(m) <- paste("Var", 1:10)
+rownames(m) <- paste("Var", 1:10)
+
+m 
+
+```
+
+
+## Start with the Easy - GGally
+
+```{r}
+# Create data 
+data <- data.frame( var1 = 1:100 + rnorm(100,sd=20), v2 = 1:100 + rnorm(100,sd=27), v3 = rep(1, 100) + rnorm(100, sd = 1)) 
+data$v4 = data$var1 ** 2 
+data$v5 = -(data$var1 ** 2) 
+
+ggcorr(data, method = c("everything", "pearson")) 
+
+```
 
 ## References
 
 -   The R Graph Gallery <https://r-graph-gallery.com/>
 -   R-Charts <https://r-charts.com/>
 -   easystats <https://github.com/easystats>
-  -   The correlation package <https://easystats.github.io/blog/posts/correlation_presentation/>
-  
-  
-  
-
+-   The correlation package <https://easystats.github.io/blog/posts/correlation_presentation/>
