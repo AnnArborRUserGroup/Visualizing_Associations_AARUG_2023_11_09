@@ -53,8 +53,9 @@ library(knitr)        # for kable(), which makes nice tables.
 #opts_knit$set(eval.after = 'fig.cap') 
 options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
-library(quarto)           # for quarto_version()
+library(quarto)      # for quarto_version()
 
+library("readxl")    # for importing from Excel
 
 ```
 
@@ -84,6 +85,26 @@ library(correlation)       # for correlations
 
 ```
 
+## Load data set 
+
+-   Attendance data for CY 2016 
+-   See: <https://dasl.datadescription.com/datafile/attendance-2016/?_sfm_methods=Correlation&_sfm_cases=4+59943>
+
+
+```{r}
+#| label: load-data
+#| echo: true
+#| eval: true
+
+attendance_df <- read_excel("..\\data\\attendance-2016.xlsx")
+
+head(attendance_df)
+tail(attendance_df)
+
+```
+
+
+
 ## What is a correlation matrix?
 
 -   It's a square matrix of numbers, with certain properties.
@@ -93,35 +114,98 @@ where the association is bounded by [-1,1] or [0,1], and X ~ii~ = 1
 -   The correlation matrix might be computed using listwise deletion or by pairwise deletion.  In the latter case, the matrix might not meet other requirements (i.e., not positive semi-definite) which will not be dealt with here.
 
 
-## Examples of Correlation Matrices
+## Create the Correlation Matrix from Numeric Variables
 
-- Create synthetic data 
 ```{r}
-set.seed(8)
-m <- matrix(round(rnorm(200), 2), 10, 10)
+#| label: create-correlation-matrix
+#| echo: true
+#| eval: true
 
-colnames(m) <- paste("Var", 1:10)
-rownames(m) <- paste("Var", 1:10)
 
-m 
+numeric_attendance_df <- attendance_df %>% 
+  select(where(is.numeric))
+
+corr_pearson <- cor(numeric_attendance_df, use = "pairwise.complete.obs",
+                     method = c("pearson")) 
+
+
+```
+
+## Options for the cor() function 
+
+(see: <https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor>)
+
+-   cor(x, y = NULL, use = "everything",
+    method = c("pearson", "kendall", "spearman"))
+
+-   The options of 'use' are:
+  -   "everything", 
+  -   "all.obs", 
+  -   "complete.obs", 
+  -   "na.or.complete"
+  -   "pairwise.complete.obs"
+
+-   For 'method', you have to choose one.
+
+## A note on missing data:
+
+-   If you have missing data, and don't give an option to deal with it, you will
+get NA's for some (or all) entries.
+
+-   However, if you do, you might have a matrix which is not positive semi-definite, which can cause problems in some statistical procedures.  
+
+-   See <https://stats.stackexchange.com/questions/69114/why-does-correlation-matrix-need-to-be-positive-semi-definite-and-what-does-it-m>
+
+
+## Heatmaps
+
+<https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/heatmap>
+
+The "col" option allows you to control the colors.
+
+```{r}
+#| label: create-heatmap
+#| echo: true
+#| eval: true
+#| fig-cap: "Heatmap"
+#| fig-width: 6
+#| fig-height: 6
+
+colors<- colorRampPalette(c("blue", "white", "red"))(20)
+
+heatmap(corr_pearson, col = colors, symm = TRUE)
 
 ```
 
 
-## Start with the Easy - GGally
+
+## GGally - ggpairs
+
+This function does a lot with paired comparison matrices.
+<https://rdrr.io/github/ggobi/ggally/f/vignettes/ggpairs.Rmd>
+<https://r-graph-gallery.com/correlogram.html>
+
+
+
 
 ```{r}
-# Create data 
-data <- data.frame( var1 = 1:100 + rnorm(100,sd=20), v2 = 1:100 + rnorm(100,sd=27), v3 = rep(1, 100) + rnorm(100, sd = 1)) 
-data$v4 = data$var1 ** 2 
-data$v5 = -(data$var1 ** 2) 
+#| label: ggpairs
+#| echo: true
+#| eval: true
+#| fig-cap: "Correlogram"
+#| fig-width: 6
+#| fig-height: 6
 
-ggcorr(data, method = c("everything", "pearson")) 
-
+ggpairs(numeric_attendance_df, title="correlogram with ggpairs()") 
 ```
 
 ## References
 
+-   Correlation matrix : A quick start guide to analyze, format and visualize a correlation matrix using R software <http://www.sthda.com/english/wiki/correlation-matrix-a-quick-start-guide-to-analyze-format-and-visualize-a-correlation-matrix-using-r-software>
+-   GGally (does many paired comparison matrices):
+  -   <https://cran.r-project.org/web/packages/GGally/index.html>
+  -   <https://rdrr.io/github/ggobi/ggally/f/vignettes/ggpairs.Rmd>
+  -   <https://r-graph-gallery.com/correlogram.html>
 -   The R Graph Gallery <https://r-graph-gallery.com/>
 -   R-Charts <https://r-charts.com/>
 -   easystats <https://github.com/easystats>
