@@ -164,12 +164,12 @@ get NA's for some (or all) entries.
 The "col" option allows you to control the colors.
 
 ```{r}
-#| label: create-heatmap
+#| label: fig-create-heatmap
 #| echo: true
 #| eval: true
 #| fig-cap: "Heatmap"
-#| fig-width: 6
 #| fig-height: 6
+#| fig-width: 6
 
 colors<- colorRampPalette(c("blue", "white", "red"))(20)
 
