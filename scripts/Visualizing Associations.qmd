@@ -163,6 +163,7 @@ get NA's for some (or all) entries.
 
 The "col" option allows you to control the colors.
 
+## 
 ```{r}
 #| label: fig-create-heatmap
 #| echo: true
@@ -185,11 +186,14 @@ This function does a lot with paired comparison matrices.
 <https://rdrr.io/github/ggobi/ggally/f/vignettes/ggpairs.Rmd>
 <https://r-graph-gallery.com/correlogram.html>
 
+This has a lot of cuntions to run pairwise matrices examining the relationship
+between pairs of variables.  You have a lot of choice about what goes into
+each cell/triangular block: 
 
-
+##
 
 ```{r}
-#| label: ggpairs
+#| label: fig-first-ggpairs
 #| echo: true
 #| eval: true
 #| fig-cap: "Correlogram"
