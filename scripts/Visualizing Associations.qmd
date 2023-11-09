@@ -133,7 +133,7 @@ where the association is bounded by [-1,1] or [0,1], and X ~ii~ = 1
 -   The correlation matrix might be computed using listwise deletion or by pairwise deletion.  In the latter case, the matrix might not meet other requirements (i.e., not positive semi-definite) which will not be dealt with here.
 
 
-## Create the Correlation Matrix from Numeric Variables
+# Create the Correlation Matrix from Numeric Variables
 
 ```{r}
 #| label: create-correlation-matrix
@@ -227,7 +227,7 @@ chart.Correlation(numeric_attendance_df, histogram=TRUE, pch=19)
 
 
 
-## GGally - ggpairs
+# GGally - ggpairs
 
 This function does a lot with paired comparison matrices.
 <https://rdrr.io/github/ggobi/ggally/f/vignettes/ggpairs.Rmd>
@@ -240,7 +240,7 @@ each cell/triangular block:
 ##
 
 ```{r}
-#| label: fig-first-ggpairs
+#| label: fig-ggpairs-1
 #| echo: true
 #| eval: true
 #| fig-cap: "Correlogram"
@@ -252,10 +252,56 @@ ggpairs(numeric_attendance_df, title="correlogram with ggpairs()")
 ```
 
 
+## You can also add features from ggplot2 for more information.
+
+This uses the 'flea' data set.
+
+
+##
+
+```{r}
+#| label: fig-ggpairs-2
+#| echo: true
+#| eval: true
+#| fig-cap: "Correlogram by species"
+#| fig-width: 6
+#| fig-height: 6
+
+data(flea)
+
+ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species)) 
+```
+
+
+# The Easy Stats Package 
+
+The <https://github.com/easystats> package covers a number of different statistical functions (), aiming to get a unified approach to data analysis.
+
+One nice feature is the **correlation** function.
+This example will use the correlation and see functions (the latter for graphs)
+
 ## 
 
+```{r}
+#| label: fig-easystats-1
+#| echo: true
+#| eval: true
+#| fig-cap: "Network Correlation Plot"
+#| fig-width: 6
+#| fig-height: 6
 
-## References
+mtcars %>% 
+  correlation(partial = TRUE) %>% 
+  plot()
+
+
+```
+
+
+
+
+
+# References
 
 -   Correlation matrix : A quick start guide to analyze, format and visualize a correlation matrix using R software <http://www.sthda.com/english/wiki/correlation-matrix-a-quick-start-guide-to-analyze-format-and-visualize-a-correlation-matrix-using-r-software>
 -   GGally (does many paired comparison matrices):
