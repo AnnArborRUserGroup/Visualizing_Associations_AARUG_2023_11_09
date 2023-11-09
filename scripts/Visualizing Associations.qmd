@@ -68,6 +68,8 @@ library("readxl")    # for importing from Excel
 # Load some packages
 library(GGally)   
 library(pheatmap)  
+library(corrplot)
+library(PerformanceAnalytics)
 
 ```
 
@@ -85,7 +87,7 @@ library(correlation)       # for correlations
 
 ```
 
-## Load data set 
+## Load data set, create a trimmed version
 
 -   Attendance data for CY 2016 
 -   See: <https://dasl.datadescription.com/datafile/attendance-2016/?_sfm_methods=Correlation&_sfm_cases=4+59943>
@@ -104,6 +106,23 @@ tail(attendance_df)
 ```
 
 
+```{r}
+#| label: trim-data
+#| echo: true
+#| eval: true
+
+trimmed_attendance_df <- attendance_df %>% 
+  select(Won, Lost, Runs, H, "2B", "3B", HR, "Home Avg Att", "Road Avg Att") %>% 
+  dplyr::rename(Double = "2B",
+                Triple = "3B",
+                Home_Avg_Att = "Home Avg Att",
+                Rd_Avg_Att = "Road Avg Att")
+  
+
+head(trimmed_attendance_df)
+tail(trimmed_attendance_df)
+
+```
 
 ## What is a correlation matrix?
 
@@ -122,7 +141,7 @@ where the association is bounded by [-1,1] or [0,1], and X ~ii~ = 1
 #| eval: true
 
 
-numeric_attendance_df <- attendance_df %>% 
+numeric_attendance_df <- trimmed_attendance_df %>% 
   select(where(is.numeric))
 
 corr_pearson <- cor(numeric_attendance_df, use = "pairwise.complete.obs",
@@ -177,6 +196,34 @@ colors<- colorRampPalette(c("blue", "white", "red"))(20)
 heatmap(corr_pearson, col = colors, symm = TRUE)
 
 ```
+## Corrplots
+
+```{r}
+#| label: fig-corrplot1
+#| echo: true
+#| eval: true
+#| fig-cap: "Corrplot - Simple"
+#| fig-height: 6
+#| fig-width: 6
+
+corrplot(corr_pearson, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45)
+```
+
+
+## From the 'PerformanceAnalytics' package 
+
+```{r}
+#| label: fig-correlation-chart
+#| echo: true
+#| eval: true
+#| fig-cap: "Correlation Chart"
+#| fig-height: 6
+#| fig-width: 6
+#| 
+chart.Correlation(numeric_attendance_df, histogram=TRUE, pch=19)
+
+```
 
 
 
@@ -201,7 +248,12 @@ each cell/triangular block:
 #| fig-height: 6
 
 ggpairs(numeric_attendance_df, title="correlogram with ggpairs()") 
+
 ```
+
+
+## 
+
 
 ## References
 
