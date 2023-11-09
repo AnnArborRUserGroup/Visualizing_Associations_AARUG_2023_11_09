@@ -213,7 +213,7 @@ corrplot(corr_pearson, type = "upper", order = "hclust",
 ```
 
 
-## From the 'PerformanceAnalytics' package 
+## Correlation Charts (from the 'PerformanceAnalytics' package) 
 
 ```{r}
 #| label: fig-correlation-chart
@@ -223,7 +223,7 @@ corrplot(corr_pearson, type = "upper", order = "hclust",
 #| fig-height: 6
 #| fig-width: 6
 #| 
-chart.Correlation(numeric_attendance_df, histogram=TRUE, pch=19)
+chart.Correlation(numeric_attendance_df, histogram=TRUE)
 
 ```
 
