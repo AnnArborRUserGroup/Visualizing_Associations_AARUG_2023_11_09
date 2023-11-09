@@ -72,6 +72,8 @@ library(GGally)
 library(pheatmap)  
 library(corrplot)
 library(PerformanceAnalytics)
+library(corrgram)         
+
 
 ```
 
@@ -273,7 +275,29 @@ data(flea)
 
 ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species)) 
 ```
+## The Corrgram package:
 
+This lets you build and customize matrices with your choice of elements
+Correcorrgram(mtcars, order=TRUE, lower.panel=panel.shade, upper.panel=panel.pie, text.panel=panel.txt, main="Car Milage Data in PC2/PC1 Order") lograms 
+
+
+
+##
+
+```{r}
+#| label: fig-corrgram-1
+#| echo: true
+#| eval: true
+#| fig-cap: "Corrgram 1"
+#| fig-width: 4
+#| fig-height: 6
+
+
+
+corrgram(mtcars, order=TRUE, lower.panel=panel.shade, upper.panel=panel.pie, text.panel=panel.txt, main="Car Milage Data in PC2/PC1 Order") 
+
+
+```
 
 # The Easy Stats Package 
 
