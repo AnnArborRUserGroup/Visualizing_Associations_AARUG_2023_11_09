@@ -278,9 +278,11 @@ ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species))
 ## The Corrgram package:
 
 This lets you build and customize matrices with your choice of elements
-Correcorrgram(mtcars, order=TRUE, lower.panel=panel.shade, upper.panel=panel.pie, text.panel=panel.txt, main="Car Milage Data in PC2/PC1 Order") lograms 
 
 
+-   panel.ellipse to display ellipses
+-   panel.pie for pie charts
+-   panel.pts for scatterplots
 
 ##
 
@@ -289,15 +291,54 @@ Correcorrgram(mtcars, order=TRUE, lower.panel=panel.shade, upper.panel=panel.pie
 #| echo: true
 #| eval: true
 #| fig-cap: "Corrgram 1"
-#| fig-width: 4
+#| fig-width: 6
 #| fig-height: 6
 
 
 
-corrgram(mtcars, order=TRUE, lower.panel=panel.shade, upper.panel=panel.pie, text.panel=panel.txt, main="Car Milage Data in PC2/PC1 Order") 
+corrgram(trimmed_attendance_df, order=TRUE, lower.panel=panel.shade, upper.panel=panel.pie, text.panel=panel.txt, main="Attendance Data - Pie Charts") 
+
 
 
 ```
+
+
+
+##
+
+```{r}
+#| label: fig-corrgram-2
+#| echo: true
+#| eval: true
+#| fig-cap: "Corrgram 2 - Ellipses"
+#| fig-width: 6
+#| fig-height: 6
+
+
+
+corrgram(trimmed_attendance_df, order=TRUE, lower.panel=panel.shade, upper.panel=panel.ellipse, text.panel=panel.txt, main="Attendance Data - Ellipses") 
+
+
+
+```
+
+##
+
+```{r}
+#| label: fig-corrgram-3
+#| echo: true
+#| eval: true
+#| fig-cap: "Corrgram 3 - Scatter Plots"
+#| fig-width: 6
+#| fig-height: 6
+
+trimmed_attendance_df
+
+corrgram(trimmed_attendance_df, order=TRUE, lower.panel=panel.shade, upper.panel=panel.pts, text.panel=panel.txt, main="Attendance Data - Scatterplots") 
+
+
+```
+
 
 # The Easy Stats Package 
 
