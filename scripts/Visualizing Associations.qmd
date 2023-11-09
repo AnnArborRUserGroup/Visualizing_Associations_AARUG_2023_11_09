@@ -15,11 +15,6 @@ author:
 
 ## Correlations and Associations
 
-Which ones you can run in R
-
--   How to get usable data sets.
--   INSERT TEXT HERE
-
 ## How to Display The Results
 
 -   Plots
@@ -34,6 +29,13 @@ Which ones you can run in R
 -   ggally
 -   ggpairs() function
 -   corrgram
+-   Easystats
+
+# Data Sets:
+
+-   MLB Attendance data for CY 2016 ((see references))
+-   The flea data set (from the GGally package)
+
 
 ## Load Packages - General
 
@@ -324,3 +326,5 @@ This lets you deal with different types of data in the same command flow.
 -   R-Charts <https://r-charts.com/>
 -   easystats <https://github.com/easystats>
 -   The correlation package <https://easystats.github.io/blog/posts/correlation_presentation/>
+-   The CORRGRAM package <https://r-graph-gallery.com/correlogram.html>
+-   MLB Attendance data, CY 2016  <https://dasl.datadescription.com/datafile/attendance-2016/?_sfm_methods=Correlation&_sfm_cases=4+59943>
