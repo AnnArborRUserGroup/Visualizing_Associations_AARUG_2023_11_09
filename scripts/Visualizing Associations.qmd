@@ -233,7 +233,7 @@ This function does a lot with paired comparison matrices.
 <https://rdrr.io/github/ggobi/ggally/f/vignettes/ggpairs.Rmd>
 <https://r-graph-gallery.com/correlogram.html>
 
-This has a lot of cuntions to run pairwise matrices examining the relationship
+This has a lot of funtions to run pairwise matrices examining the relationship
 between pairs of variables.  You have a lot of choice about what goes into
 each cell/triangular block: 
 
@@ -280,6 +280,9 @@ The <https://github.com/easystats> package covers a number of different statisti
 One nice feature is the **correlation** function.
 This example will use the correlation and see functions (the latter for graphs)
 
+The example below uses the Easystats 'partial correlation' feature along with 
+a Gaussian Graphical Model:
+
 ## 
 
 ```{r}
@@ -297,6 +300,15 @@ mtcars %>%
 
 ```
 
+Easystats also covers a variety of correlations and association measures,
+such as:
+-   Bayesian,
+-   Tetrachoric,
+-   Polychoric, 
+-   Biserial,
+-   Biweight.
+
+This lets you deal with different types of data in the same command flow.
 
 
 
